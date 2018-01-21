@@ -16,13 +16,14 @@ namespace SealModSix.Items
         {
             item.damage = 100;
             item.melee = true;
-            item.width = 120;
-            item.height = 120;
+            item.width = 40;
+            item.height = 40;
             item.useTime = 10;
             item.useAnimation = 10;
             item.useStyle = 1;
             item.knockBack = 6;
             item.shoot = 470;
+            item.scale = 1.25f;
             item.shootSpeed = 8f;
             item.value = 10000;
             item.rare = 11;
@@ -55,17 +56,19 @@ namespace SealModSix.Items
             target.AddBuff(BuffID.OnFire, 60);
         }
 
-        // This is dangerous. I've created too many stars. Oh well
+        // This could crash shit
         public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
         {
-            Vector2 target = Main.screenPosition + new Vector2((float)Main.mouseX, (float)Main.mouseY);
-            float ceilingLimit = target.Y;
-            if (ceilingLimit > player.Center.Y - 200f)
-            {
-                ceilingLimit = player.Center.Y - 200f;
-            }
             for (int i = 0; i < 32; i++)
             {
+                Vector2 target = Main.screenPosition + new Vector2((float)Main.mouseX + (float)Main.rand.Next(-2401, 2401),
+                                                                   (float)Main.mouseY);
+                float ceilingLimit = target.Y;
+                if (ceilingLimit > player.Center.Y - 200f)
+                {
+                    ceilingLimit = player.Center.Y - 200f;
+                }
+
                 position = player.Center + new Vector2((-(float)Main.rand.Next(-2401, 2401) * player.direction), -600f);
                 position.Y -= (100 * i);
                 Vector2 heading = target - position;
