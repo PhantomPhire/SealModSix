@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace SealModSix.Items
+namespace SealModSix.Items.Weapons
 {
     public class BombRain : ModItem
     {
